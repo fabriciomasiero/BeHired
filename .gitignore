@@ -90,3 +90,9 @@ fastlane/test_output
 iOSInjectionProject/
 *.xcuserstate
 *.xcuserstate
+*.xcbkptlist
+DiffableCollection.xcodeproj/project.xcworkspace/xcuserdata/fabriciomasiero.xcuserdatad/UserInterfaceState.xcuserstate
+DiffableCollection.xcodeproj/project.xcworkspace/xcuserdata/fabriciomasiero.xcuserdatad/UserInterfaceState.xcuserstate
+*.xcbkptlist
+DiffableCollection.xcodeproj/xcuserdata/fabriciomasiero.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
+DiffableCollection.xcodeproj/project.xcworkspace/xcuserdata/fabriciomasiero.xcuserdatad/UserInterfaceState.xcuserstate
