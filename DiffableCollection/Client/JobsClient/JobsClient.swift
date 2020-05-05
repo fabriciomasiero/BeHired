@@ -14,7 +14,7 @@ public class JobsClient: APIClient {
     public typealias Jobs = [Job]
     
 //    var path: String = "https://jobs.github.com/positions.json?page=1&search=code"
-    var path: String = "https://jobs.github.com/positions.json?description=ios"
+    var path: String = "https://jobs.github.com/positions.json"
     
     private let session: URLSession
 //    private let domain: URL?
@@ -29,7 +29,11 @@ public class JobsClient: APIClient {
             guard let url = URL(string: path) else {
                   return nil
               }
-            return URLRequest(url: url)
+            let param = ["page" : String(page), "search" : search ?? ""]
+            var urlRequest = URLRequest(url: url)
+            urlRequest.allHTTPHeaderFields = param
+            urlRequest.httpMethod = "get"
+            return urlRequest
         }
         return jobs(urlRequest: jobsUrl())
     }

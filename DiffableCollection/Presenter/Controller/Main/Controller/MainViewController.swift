@@ -91,9 +91,10 @@ extension MainViewController: UITableViewDataSource {
 extension MainViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
-        viewModel.search = text
-        viewModel.fetchJobs()
-        print(text)
+        if text.count > 2 {
+            viewModel.search = text
+            viewModel.fetchJobs()
+        }
     }
 }
 extension MainViewController: UISearchControllerDelegate {
