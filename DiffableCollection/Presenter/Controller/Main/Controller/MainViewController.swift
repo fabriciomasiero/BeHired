@@ -17,6 +17,11 @@ class MainViewController: UIViewController {
     private var jobs: [Job] = []
     private var switchSubscriber: AnyCancellable?
     
+    private let searchController: UISearchController = {
+        let searchController = UISearchController()
+        return searchController
+    }()
+    
     init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, viewModel: JobsViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -31,6 +36,9 @@ class MainViewController: UIViewController {
         tableView.register(UINib(nibName: "JobTableViewCell", bundle: .main), forCellReuseIdentifier: "Cell")
         tableView.delegate = self
         tableView.dataSource = self
+        navigationItem.searchController = searchController
+        searchController.delegate = self
+        searchController.searchResultsUpdater = self
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -78,7 +86,17 @@ extension MainViewController: UITableViewDataSource {
         cell.set(job: jobs[indexPath.row], indexPath: indexPath)
         return cell
     }
-    
+}
+
+extension MainViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else { return }
+        viewModel.search = text
+        viewModel.fetchJobs()
+        print(text)
+    }
+}
+extension MainViewController: UISearchControllerDelegate {
     
 }
 //extension MainViewController: NSDiffableDataSourceSnapshot<SectionIdentifierType: Hashable, ItemIdentifierType: Hashable> {
