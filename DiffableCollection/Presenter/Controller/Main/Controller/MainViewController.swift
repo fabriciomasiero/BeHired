@@ -47,13 +47,7 @@ class MainViewController: UIViewController {
     private func getJobs() {
         viewModel.page = 1
         viewModel.search = ""
-//        let publi
-//        switchSubscriber = viewModel.$jobs.receive(subscriber: T##Subscriber)
-//        switchSubscriber = viewModel.$jobs.receive(on: DispatchQueue.main).subs
         viewModel.fetchJobs()
-        
-//        switchSubscriber = viewModel.$jobs.receive(on: DispatchQueue.main).assign(to: \[Job] as! ReferenceWritableKeyPath<[Job], Published<[Job]>.Publisher.Output>, on: jobs)
-//        let what = viewModel.jobsSubject.subscribe(on: DispatchQueue.main).assign(to: \JobsViewModel.jobs, on: viewModel)
         
         switchSubscriber = viewModel.jobsSubject.sink(receiveCompletion: { event in
             print("event")
@@ -63,9 +57,6 @@ class MainViewController: UIViewController {
                 self.tableView.reloadData()
             }
         })
-        
-//        viewModel.jobsSubject.sub
-//        print(teste.)
     }
 }
 extension MainViewController: UITableViewDelegate {
@@ -91,9 +82,10 @@ extension MainViewController: UITableViewDataSource {
 extension MainViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else { return }
-        viewModel.search = text
-        viewModel.fetchJobs()
-        print(text)
+        if text.count > 2 {
+            viewModel.search = text
+            viewModel.fetchJobs()
+        }
     }
 }
 extension MainViewController: UISearchControllerDelegate {
