@@ -26,12 +26,15 @@ public class JobsClient: APIClient {
     
     func getJobs(page: Int, search: String?) -> AnyPublisher<Jobs, JobsError> {
         func jobsUrl() -> URLRequest? {
-            guard let url = URL(string: path) else {
+            guard var urlComponents = URLComponents(string: path) else {
                   return nil
               }
-            let param = ["page" : String(page), "search" : search ?? ""]
+            urlComponents.queryItems = [URLQueryItem(name: "page", value: String(page)),
+                                        URLQueryItem(name: "search", value: search ?? " ")]
+            guard let url = urlComponents.url else {
+                return nil
+            }
             var urlRequest = URLRequest(url: url)
-            urlRequest.allHTTPHeaderFields = param
             urlRequest.httpMethod = "get"
             return urlRequest
         }
