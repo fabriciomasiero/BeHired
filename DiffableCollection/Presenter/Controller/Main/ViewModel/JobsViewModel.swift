@@ -23,18 +23,6 @@ public class JobsViewModel {
         self.jobsClient = jobsClient
     }
     func fetchJobs() {
-//        jobsClient.getJobs(page: page, search: search).sink(receiveCompletion: { event in
-//        }) { response in
-////            self.$jobs.publisher
-//            self.jobsSubject.send(response)
-//        }.store(in: &disposables)
-//        passthroughSubject.sink(receiveCompletion: {  in
-//
-//        }, receiveValue: T##(([Job]) -> Void)##(([Job]) -> Void)##([Job]) -> Void)
-//        jobsClient.getJobs(page: page, search: search).flatMap {
-//            return $0
-//
-//        }
         jobsClient.getJobs(page: page, search: search).map { response in
             DispatchQueue.main.async {
                 self.jobsSubject.send(response)
