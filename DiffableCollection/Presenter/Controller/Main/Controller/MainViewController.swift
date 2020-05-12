@@ -61,9 +61,7 @@ class MainViewController: UIViewController {
 }
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let viewModel = JobViewModel(job: jobs[indexPath.row])
-        let jobViewController = JobViewController(nibName: "JobViewController", bundle: .main, viewModel: viewModel)
-        navigationController?.pushViewController(jobViewController, animated: true)
+        navigationController?.pushViewController(viewModel.getViewControllerToPresent(job: jobs[indexPath.row]), animated: true)
     }
 }
 extension MainViewController: UITableViewDataSource {

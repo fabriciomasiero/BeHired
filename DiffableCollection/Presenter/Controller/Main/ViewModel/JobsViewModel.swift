@@ -37,4 +37,10 @@ public class JobsViewModel {
                 }
             }) {()}.store(in: &disposables)
     }
+    
+    func getViewControllerToPresent(job: Job) -> JobViewController {
+        let viewModel = JobViewModel(job: job)
+        let jobViewController = JobViewController(nibName: "JobViewController", bundle: .main, viewModel: viewModel)
+        return jobViewController
+    }
 }
