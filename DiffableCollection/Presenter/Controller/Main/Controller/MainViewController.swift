@@ -61,7 +61,8 @@ class MainViewController: UIViewController {
 }
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(viewModel.getViewControllerToPresent(job: jobs[indexPath.row]), animated: true)
+        navigationController?.pushViewController(viewModel.getViewControllerToPresent(job: jobs[indexPath.row]),
+                                                 animated: true)
     }
 }
 extension MainViewController: UITableViewDataSource {
